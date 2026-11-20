@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - S K GENERAL STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        body { margin: 0; padding: 24px; background: #eef2f6; color: #1e293b; }
+        .container { max-width: 1080px; margin: 0 auto; }
+
+        /* Hero Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            margin-bottom: 24px;
+        }
+        .brand h1 { margin: 0; font-size: 24px; letter-spacing: 0.5px; }
+        .brand p { margin: 4px 0 0; font-size: 13px; color: #cbd5e1; }
+
+        nav { display: flex; gap: 10px; }
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            transition: all 0.2s ease;
+        }
+        nav a:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-1px); }
+        nav a.active { background: #ffffff; color: #1e3a8a; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        /* Live Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white;
+            padding: 18px 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+            border-left: 5px solid #2563eb;
+        }
+        .stat-card.warn { border-left-color: #ef4444; }
+        .stat-card.green { border-left-color: #10b981; }
+        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: #64748b; font-weight: 600; }
+        .stat-value { font-size: 26px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+            margin-bottom: 24px;
+        }
+        .card h2 { margin: 0 0 16px; font-size: 18px; color: #0f172a; }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+            align-items: center;
+        }
+        input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+
+        button {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25); }
+
+        /* Search Bar */
+        .table-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .table-header h2 { margin: 0; }
+        #searchInput { max-width: 340px; background: #f8fafc; }
+
+        /* Table */
+        .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+        th { background: #f8fafc; color: #475569; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        tbody tr { transition: background 0.15s; }
+        tbody tr:hover { background: #f8fafc; }
+
+        .low-badge {
+            display: inline-block;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        td form { margin: 0; padding: 0; }
+        td button {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+        td button:hover { background: #dc2626; color: white; box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">
+                <h1>S K GENERAL STORE</h1>
+                <p>Smart Inventory & Billing Portal</p>
+            </div>
+            <nav>
+                <a href="/logout" style="background: #ef4444; color: white;">Logout</a>
+                <a href="/inventory" class="active">Inventory</a>
+                <a href="/billing">Customer Billing</a>
+            </nav>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Products</div>
+                <div class="stat-value" id="totalProducts">0</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-label">Total Stock Units</div>
+                <div class="stat-value" id="totalUnits">0</div>
+            </div>
+            <div class="stat-card warn">
+                <div class="stat-label">Low Stock Alerts (<30)</div>
+                <div class="stat-value" id="lowStockCount">0</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Add New Product</h2>
+            <form action="/add-product" method="POST" class="form-grid">
+                <input type="text" name="product_name" placeholder="Product Name" required>
+                <input type="text" name="category" placeholder="Category (e.g. Staples)" required>
+                <input type="number" step="0.01" name="price" placeholder="Price (Rs.)" required>
+                <input type="number" name="stock_quantity" placeholder="Stock Qty" required>
+                <button type="submit">+ Add Product</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="table-header">
+                <h2>Current Stock</h2>
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search products or category...">
+            </div>
+
+            <div class="table-wrap">
+                <table id="stockTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{PRODUCT_ROWS}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterTable() {
+            const filter = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#stockTable tbody tr");
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(filter) ? "" : "none";
+            });
+        }
+
+        // Calculate stats & highlight low stock (< 30)
+        const rows = document.querySelectorAll("#stockTable tbody tr");
+        let totalUnits = 0;
+        let lowStockCount = 0;
+
+        rows.forEach(row => {
+            const stockCell = row.cells[4];
+            if (stockCell) {
+                const qty = parseInt(stockCell.innerText) || 0;
+                totalUnits += qty;
+                if (qty < 30) {
+                    lowStockCount++;
+                    stockCell.innerHTML = `<strong style="color:#dc2626">${qty}</strong> <span class="low-badge">Low</span>`;
+                    row.style.backgroundColor = "#fff5f5";
+                }
+            }
+        });
+
+        document.getElementById("totalProducts").innerText = rows.length;
+        document.getElementById("totalUnits").innerText = totalUnits;
+        document.getElementById("lowStockCount").innerText = lowStockCount;
+    </script>
+</body>
+</html>

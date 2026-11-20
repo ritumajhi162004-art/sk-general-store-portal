@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - S K GENERAL STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+            padding: 20px;
+        }
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 36px 32px;
+            border-radius: 18px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35);
+        }
+        .brand { text-align: center; margin-bottom: 26px; }
+        .brand h1 { margin: 0; font-size: 22px; color: #1e3a8a; letter-spacing: 0.5px; }
+        .brand p { margin: 4px 0 0; font-size: 13px; color: #64748b; }
+
+        .error-box {
+            display: none;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .field { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            margin-top: 6px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="brand">
+            <h1>S K GENERAL STORE</h1>
+            <p>Admin Portal Login</p>
+        </div>
+
+        <div id="errorBox" class="error-box">Invalid username or password.</div>
+
+        <form action="/login" method="POST">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter username" required>
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+
+    <script>
+        if (window.location.search.includes("error=1")) {
+            document.getElementById("errorBox").style.display = "block";
+        }
+    </script>
+</body>
+</html>

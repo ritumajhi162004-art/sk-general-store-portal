@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing - S K GENERAL STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        body { margin: 0; padding: 24px; background: #eef2f6; color: #1e293b; }
+        .container { max-width: 1080px; margin: 0 auto; }
+
+        /* Hero Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            margin-bottom: 24px;
+        }
+        .brand h1 { margin: 0; font-size: 24px; letter-spacing: 0.5px; }
+        .brand p { margin: 4px 0 0; font-size: 13px; color: #cbd5e1; }
+
+        nav { display: flex; gap: 10px; }
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            transition: all 0.2s ease;
+        }
+        nav a:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-1px); }
+        nav a.active { background: #ffffff; color: #1e3a8a; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        /* Side-by-Side POS Layout */
+        .pos-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+        @media (max-width: 768px) { .pos-grid { grid-template-columns: 1fr; } }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+        }
+        .card h2 { margin: 0 0 20px; font-size: 19px; color: #0f172a; }
+
+        .field { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus, select:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25); }
+
+        /* Receipt Card */
+        #receiptBox {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            border: 2px dashed #94a3b8;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+        }
+        .receipt-header { text-align: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 14px; margin-bottom: 18px; }
+        .receipt-header h2 { margin: 0; font-size: 20px; color: #1e3a8a; letter-spacing: 0.8px; }
+        .receipt-header p { margin: 4px 0 0; font-size: 12px; color: #64748b; }
+
+        #billText {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #15803d;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+            min-height: 54px;
+        }
+        .receipt-footer { text-align: center; border-top: 1px dashed #cbd5e1; padding-top: 14px; margin-top: 18px; font-size: 12px; color: #64748b; }
+
+        .print-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            margin-top: 16px;
+        }
+        .print-btn:hover { box-shadow: 0 6px 14px rgba(16, 185, 129, 0.25); }
+
+        @media print {
+            body * { visibility: hidden; }
+            #receiptBox, #receiptBox * { visibility: visible; }
+            #receiptBox { position: absolute; left: 0; top: 0; width: 100%; border: none; box-shadow: none; }
+            .print-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">
+                <h1>S K GENERAL STORE</h1>
+                <p>Smart Inventory & Billing Portal</p>
+            </div>
+            <nav>
+                <a href="/logout" style="background: #ef4444; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">Logout</a>
+                <a href="/inventory">Inventory</a>
+                <a href="/billing" class="active">Customer Billing</a>
+            </nav>
+        </div>
+
+        <div class="pos-grid">
+            <div class="card">
+                <h2>Generate Customer Bill</h2>
+                <form action="/create-bill" method="POST">
+                    <div class="field">
+                        <label>Customer Name</label>
+                        <input type="text" name="customer_name" placeholder="Enter customer name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Select Product</label>
+                        <select name="product_id" required>
+                            {{PRODUCT_OPTIONS}}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" min="1" value="1" required>
+                    </div>
+
+                    <button type="submit">Generate Bill</button>
+                </form>
+            </div>
+
+            <div id="receiptBox">
+                <div class="receipt-header">
+                    <h2>S K GENERAL STORE</h2>
+                    <p>Dhanbad, Jharkhand</p>
+                    <p>Date: <span id="billDate"></span></p>
+                </div>
+
+                <div id="billText">{{BILL_MESSAGE}}</div>
+
+                <div class="receipt-footer">
+                    Thank you for shopping with us! Visit again.
+                </div>
+
+                <button type="button" class="print-btn" onclick="window.print()">Print Receipt</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("billDate").innerText = new Date().toLocaleString();
+        const billEl = document.getElementById("billText");
+        if (billEl.innerText.trim() === "" || billEl.innerText.trim() === "{{BILL_MESSAGE}}") {
+            billEl.innerText = "Generate a bill on the left to preview the receipt here.";
+            billEl.style.background = "#f8fafc";
+            billEl.style.borderColor = "#e2e8f0";
+            billEl.style.color = "#64748b";
+        }
+    </script>
+</body>
+</html>
